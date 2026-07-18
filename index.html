@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d32">
+  <meta name="description" content="Особенное письмо для Елены в день её рождения.">
+  <title>Елене — 29</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game/fight-game.css">
+  <script src="script.js" defer></script>
+  <script src="game/vendor/phaser.min.js" defer></script>
+  <script src="game/fighter-assets.js?v=3" defer></script>
+  <script src="game/fight-game.js?v=3" defer></script>
+</head>
+<body class="is-gated">
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <nav class="language-switch" aria-label="Language / Язык">
+    <button class="language-switch__button is-active" type="button" data-language="ru" aria-pressed="true">RU</button>
+    <span aria-hidden="true">/</span>
+    <button class="language-switch__button" type="button" data-language="en" aria-pressed="false">EN</button>
+  </nav>
+
+  <section class="gate" id="gate" aria-labelledby="gate-title">
+    <div class="aurora aurora--one" aria-hidden="true"></div>
+    <div class="aurora aurora--two" aria-hidden="true"></div>
+    <div class="gate__stars" aria-hidden="true"></div>
+
+    <div class="gate__content">
+      <p class="gate__eyebrow" data-i18n="gateEyebrow">Личная доставка из Набеля в Северодвинск</p>
+      <button class="letter-trigger" id="openLetter" type="button" data-i18n-aria="openAria">
+        <span class="envelope" aria-hidden="true">
+          <span class="envelope__shadow"></span>
+          <span class="envelope__back"></span>
+          <span class="envelope__letter">
+            <span class="envelope__to" data-i18n="envelopeTo">Елене</span>
+            <span class="envelope__rule"></span>
+            <span class="envelope__postmark" data-i18n="postmark">Северодвинск · 28.07.2026</span>
+          </span>
+          <span class="envelope__front"></span>
+          <span class="envelope__flap"></span>
+          <span class="wax-seal"><span>29</span></span>
+        </span>
+        <span class="letter-trigger__hint">
+          <span data-i18n="openHint">Нажми, чтобы открыть</span>
+          <span class="letter-trigger__line" aria-hidden="true"></span>
+        </span>
+      </button>
+      <p class="gate__date" id="gate-title" data-i18n="gateDate">28 июля · только для Елены</p>
+    </div>
+  </section>
+
+  <div class="video-overlay" id="videoOverlay" role="dialog" aria-modal="true" aria-labelledby="videoTitle" hidden>
+    <div class="video-overlay__aurora" aria-hidden="true"></div>
+    <h2 class="sr-only" id="videoTitle" data-i18n="videoTitle">Маленькое вступление</h2>
+    <div class="video-frame">
+      <video id="introVideo" playsinline preload="metadata" src="videointro.mp4"></video>
+      <div class="video-frame__shine" aria-hidden="true"></div>
+      <p class="video-error" id="videoError" data-i18n="videoError" hidden>Видео не запустилось, но письмо всё равно ждёт тебя.</p>
+    </div>
+    <div class="video-controls">
+      <button class="round-control" id="muteVideo" type="button" data-i18n-aria="muteAria">
+        <span class="sound-icon" aria-hidden="true"><i></i><b></b></span>
+        <span data-i18n="mute">Звук</span>
+      </button>
+      <button class="text-control" id="skipVideo" type="button" data-i18n="skip">Пропустить</button>
+    </div>
+  </div>
+
+  <div class="transition-flash" aria-hidden="true"></div>
+
+  <main class="site-main" id="mainContent" tabindex="-1" aria-hidden="true">
+    <header class="hero" id="hero">
+      <div class="hero__aurora" aria-hidden="true"></div>
+      <div class="hero__number" aria-hidden="true">29</div>
+
+      <div class="hero__copy reveal" data-reveal>
+        <p class="section-kicker" data-i18n="heroKicker">Письмо с края Белого моря</p>
+        <h1>
+          <span data-i18n="heroTitle">Елена, с днём рождения.</span>
+        </h1>
+        <p class="hero__dedication" data-i18n="heroDedication">Для самой красивой женщины из тех, кого мне посчастливилось знать.</p>
+        <div class="hero__date-line">
+          <span>28</span>
+          <i aria-hidden="true"></i>
+          <span data-i18n="july">июля</span>
+          <i aria-hidden="true"></i>
+          <span>2026</span>
+        </div>
+        <button class="hero__replay" type="button" data-replay-video>
+          <span class="hero__replay-icon" aria-hidden="true"></span>
+          <span data-i18n="heroReplay">Посмотреть видео ещё раз</span>
+        </button>
+      </div>
+
+      <figure class="hero__portrait reveal" data-reveal>
+        <div class="hero__photo-mat">
+          <img src="Hero Section.webp" alt="Елена задувает свечи 29 на праздничном торте" data-i18n-alt="heroAlt" fetchpriority="high">
+          <figcaption>
+            <span data-i18n="portraitCaption">Сияние найдено. Источник — Елена.</span>
+            <span aria-hidden="true">№ 29</span>
+          </figcaption>
+        </div>
+      </figure>
+
+      <a class="scroll-cue" href="#letter" data-i18n-aria="scrollAria">
+        <span data-i18n="scroll">Читать письмо</span>
+        <i aria-hidden="true"></i>
+      </a>
+    </header>
+
+    <section class="letter-section" id="letter">
+      <div class="letter-section__wash" aria-hidden="true"></div>
+      <div class="letter-intro reveal" data-reveal>
+        <p class="section-kicker section-kicker--green" data-i18n="letterKicker">То, что стоит сказать вслух</p>
+        <h2 data-i18n="letterTitle">Северное сияние бывает не только в небе.</h2>
+      </div>
+
+      <article class="paper-letter reveal" data-reveal>
+        <span class="paper-letter__fold paper-letter__fold--one" aria-hidden="true"></span>
+        <span class="paper-letter__fold paper-letter__fold--two" aria-hidden="true"></span>
+        <div class="paper-letter__stamp" aria-hidden="true">29</div>
+        <p class="paper-letter__salutation" data-i18n="letterSalutation">Елена,</p>
+        <p data-i18n="letterP1">сегодня тебе двадцать девять. И это прекрасный повод остановить обычный день на минуту и сказать то, что иногда теряется между делами, сообщениями и расстояниями.</p>
+        <p data-i18n="letterP2">Ты — самая красивая женщина из тех, кого мне посчастливилось знать. А в твоих зелёных глазах, кажется, живёт собственное северное сияние — редкое, спокойное и совершенно невозможное для забвения.</p>
+        <blockquote data-i18n="letterQuote">Красота привлекает взгляд. Но настоящее чудо — это свет, который человек оставляет после себя.</blockquote>
+        <p data-i18n="letterP3">Пусть новый год твоей жизни принесёт тебе больше лёгкости, искреннего смеха и тихой уверенности в себе. Пусть рядом будут люди, которые видят, ценят и берегут тебя такой, какая ты есть.</p>
+        <p data-i18n="letterP4">Желаю тебе приключений, о которых захочется рассказывать; спокойствия, к которому приятно возвращаться; и счастливых неожиданностей, которые случаются именно вовремя.</p>
+      </article>
+
+      <div class="letter-footnote reveal" data-reveal>
+        <span aria-hidden="true">✦</span>
+        <p data-i18n="letterFootnote">Ни одно северное сияние не было потревожено при доставке этого письма.</p>
+      </div>
+    </section>
+
+    <section class="constellation-section" id="wishes" aria-labelledby="wishesTitle">
+      <div class="constellation-section__aurora constellation-section__aurora--one" aria-hidden="true"></div>
+      <div class="constellation-section__aurora constellation-section__aurora--two" aria-hidden="true"></div>
+
+      <div class="constellation-header reveal" data-reveal>
+        <p class="section-kicker" data-i18n="wishesKicker">Небольшая карта на следующий год</p>
+        <h2 id="wishesTitle" data-i18n="wishesTitle">29 северных огоньков</h2>
+        <p data-i18n="wishesIntro">У каждого — одно короткое пожелание. Можно открыть один, несколько или все. Счастье не требует прохождения квеста.</p>
+      </div>
+
+      <div class="sky-map" id="skyMap" aria-label="29 birthday wishes" data-i18n-aria="skyMapAria">
+        <div class="sky-map__lines" aria-hidden="true"></div>
+        <div class="wish-card" id="wishCard" role="status" aria-live="polite">
+          <span class="wish-card__number">✦</span>
+          <p data-i18n="wishPrompt">Коснись любого огонька</p>
+        </div>
+      </div>
+
+      <p class="wish-progress" aria-live="polite">
+        <span data-i18n="openedLabel">Открыто</span>
+        <strong id="openedCount">0</strong>
+        <span data-i18n="ofLabel">из 29</span>
+      </p>
+    </section>
+
+    <section class="finale" id="finale">
+      <div class="finale__glow" aria-hidden="true"></div>
+      <div class="finale__content reveal" data-reveal>
+        <p class="section-kicker section-kicker--green" data-i18n="finalKicker">Остался один огонёк</p>
+        <h2 data-i18n="finalTitle">Самое важное пожелание</h2>
+        <p class="finale__lead" data-i18n="finalLead">Некоторые слова должны появляться только после маленького чуда.</p>
+        <button class="glow-button" id="lightFinalGlow" type="button" aria-expanded="false">
+          <span class="glow-button__spark" aria-hidden="true"></span>
+          <span data-i18n="finalButton">Зажечь последний огонёк</span>
+        </button>
+
+        <div class="final-message" id="finalMessage" aria-live="polite" hidden>
+          <span class="final-message__star" aria-hidden="true">✦</span>
+          <p data-i18n="finalWish">Пусть в этом году жизнь будет к тебе такой же доброй, какой ты заслуживаешь.</p>
+          <h3 data-i18n="finalBirthday">С двадцатидевятилетием, Елена.</h3>
+          <p class="final-message__signature" data-i18n="signature">От человека, которому очень повезло тебя знать.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="storybook-section" id="storybooks" aria-labelledby="storybookTitle">
+      <div class="storybook-section__wash" aria-hidden="true"></div>
+      <span class="storybook-doodle storybook-doodle--star" aria-hidden="true">✦</span>
+      <span class="storybook-doodle storybook-doodle--arrow" aria-hidden="true">↝</span>
+
+      <div class="storybook-intro">
+        <figure class="collection-cover">
+          <div class="collection-cover__book">
+            <span class="collection-cover__tape" aria-hidden="true"></span>
+            <img src="Elena and Yanina Storubooks Collection Thumbail.jpg" alt="Иллюстрированная обложка сборника историй Янины и Елены" data-i18n-alt="storybookCoverAlt" loading="lazy">
+            <span class="collection-cover__pages" aria-hidden="true"></span>
+          </div>
+          <figcaption><span data-i18n="storybookCoverCaption">Архив совершенно правдивых приключений</span><b>01—04</b></figcaption>
+        </figure>
+
+        <header class="storybook-header">
+          <p class="section-kicker section-kicker--green" data-i18n="storybookKicker">После письма — четыре истории</p>
+          <p class="storybook-header__edition" aria-hidden="true">COLLECTION · 29</p>
+          <h2 id="storybookTitle" data-i18n="storybookTitle">Книжная полка Янины и Елены</h2>
+          <p data-i18n="storybookIntro">Четыре короткие иллюстрированные истории, собранные с предельной серьёзностью и совершенно несерьёзным настроением.</p>
+          <div class="storybook-stats" aria-label="4 books, 40 pages" data-i18n-aria="storybookStatsAria">
+            <span><strong>4</strong><small data-i18n="storybookBooksLabel">книги</small></span>
+            <i aria-hidden="true"></i>
+            <span><strong>40</strong><small data-i18n="storybookPagesTotal">страниц всего</small></span>
+          </div>
+        </header>
+      </div>
+
+      <ol class="book-shelf" aria-label="Yanina and Elena storybooks" data-i18n-aria="storybookShelfAria">
+        <li class="book-card book-card--one" data-book-index="0" data-book-src="Elena Storybook01.pdf" data-book-title-key="storybookBook1Title">
+          <article>
+            <div class="book-card__topline"><span data-i18n="storybookVolume">Том</span><b>01</b></div>
+            <div class="book-card__mark" aria-hidden="true">I</div>
+            <h3 data-i18n="storybookBook1Title">Книга первая</h3>
+            <p data-i18n="storybookBook1Teaser">Здесь всё начинается — достаточно невинно, чтобы никто не заподозрил продолжение.</p>
+            <div class="book-card__meta"><span data-i18n="storybookTenPages">10 страниц</span><span>PDF</span></div>
+            <div class="book-card__actions">
+              <button type="button" class="book-read" data-book-open aria-haspopup="dialog"><span data-i18n="storybookRead">Читать</span><i aria-hidden="true">→</i></button>
+              <a href="Elena Storybook01.pdf" download><span data-i18n="storybookDownload">Скачать</span><span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+        </li>
+
+        <li class="book-card book-card--two" data-book-index="1" data-book-src="Elena Sorybook02.pdf" data-book-title-key="storybookBook2Title">
+          <article>
+            <div class="book-card__topline"><span data-i18n="storybookVolume">Том</span><b>02</b></div>
+            <div class="book-card__mark" aria-hidden="true">II</div>
+            <h3 data-i18n="storybookBook2Title">Книга вторая</h3>
+            <p data-i18n="storybookBook2Teaser">Продолжение, в котором здравый смысл ненадолго вышел из комнаты.</p>
+            <div class="book-card__meta"><span data-i18n="storybookTenPages">10 страниц</span><span>PDF</span></div>
+            <div class="book-card__actions">
+              <button type="button" class="book-read" data-book-open aria-haspopup="dialog"><span data-i18n="storybookRead">Читать</span><i aria-hidden="true">→</i></button>
+              <a href="Elena Sorybook02.pdf" download><span data-i18n="storybookDownload">Скачать</span><span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+        </li>
+
+        <li class="book-card book-card--three" data-book-index="2" data-book-src="Elena Sorybook03.pdf" data-book-title-key="storybookBook3Title">
+          <article>
+            <div class="book-card__topline"><span data-i18n="storybookVolume">Том</span><b>03</b></div>
+            <div class="book-card__mark" aria-hidden="true">III</div>
+            <h3 data-i18n="storybookBook3Title">Книга третья</h3>
+            <p data-i18n="storybookBook3Teaser">К этому моменту история уже точно знает, что делает. Наверное.</p>
+            <div class="book-card__meta"><span data-i18n="storybookTenPages">10 страниц</span><span>PDF</span></div>
+            <div class="book-card__actions">
+              <button type="button" class="book-read" data-book-open aria-haspopup="dialog"><span data-i18n="storybookRead">Читать</span><i aria-hidden="true">→</i></button>
+              <a href="Elena Sorybook03.pdf" download><span data-i18n="storybookDownload">Скачать</span><span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+        </li>
+
+        <li class="book-card book-card--four" data-book-index="3" data-book-src="Elena Sorybook04.pdf" data-book-title-key="storybookBook4Title">
+          <article>
+            <div class="book-card__topline"><span data-i18n="storybookVolume">Том</span><b>04</b></div>
+            <div class="book-card__mark" aria-hidden="true">IV</div>
+            <h3 data-i18n="storybookBook4Title">Книга четвёртая</h3>
+            <p data-i18n="storybookBook4Teaser">Финал с очень важным видом, аккуратной обложкой и последним неожиданным поворотом.</p>
+            <div class="book-card__meta"><span data-i18n="storybookTenPages">10 страниц</span><span>PDF</span></div>
+            <div class="book-card__actions">
+              <button type="button" class="book-read" data-book-open aria-haspopup="dialog"><span data-i18n="storybookRead">Читать</span><i aria-hidden="true">→</i></button>
+              <a href="Elena Sorybook04.pdf" download><span data-i18n="storybookDownload">Скачать</span><span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+        </li>
+      </ol>
+
+      <p class="storybook-footnote"><span aria-hidden="true">※</span><span data-i18n="storybookFootnote">Любое сходство с реальными приключениями следует считать отличной работой автора.</span></p>
+
+      <div class="paw-trail" id="pawTrail" aria-hidden="true"></div>
+
+      <section class="fight-section reveal" id="birthdayFight" data-reveal aria-labelledby="fightSectionTitle">
+        <header class="fight-section__header">
+          <div>
+            <p class="section-kicker" data-fight-copy="kicker">A secret birthday bonus round</p>
+            <h2 id="fightSectionTitle" data-fight-copy="title">Aurora Showdown</h2>
+          </div>
+          <p class="fight-section__intro" data-fight-copy="intro">Guide Elena through a playful best-of-three sparring match against Yanina. Read the distance, block at the right moment, and charge the Aurora move before the 29-second bell.</p>
+        </header>
+
+        <div class="fight-preview">
+          <span class="fight-preview__badge" data-fight-copy="badge">Mobile birthday fighter</span>
+          <div class="fight-preview__content">
+            <div class="fight-preview__copy">
+              <strong data-fight-copy="previewTitle">Elena vs. Yanina</strong>
+              <span data-fight-copy="previewMeta">Best of three · 29-second rounds · adaptive opponent</span>
+            </div>
+            <button class="fight-start" type="button" data-fight-start data-fight-copy="start">Start fight</button>
+          </div>
+        </div>
+        <p class="fight-mobile-note" data-fight-copy="rotateNote">The fight opens in landscape mode</p>
+      </section>
+
+      <section class="club30-section reveal" data-reveal id="club30">
+        <div class="club30-header">
+          <p class="section-kicker section-kicker--green" data-i18n="club30Kicker">Увидимся в следующем году</p>
+          <h2 data-i18n="club30Title">Добро пожаловать в клуб 30-ти</h2>
+        </div>
+        <div class="club30-content">
+          <div class="club30-timer" aria-live="polite">
+            <div class="timer-block">
+              <span class="timer-value" id="timer-days">000</span>
+              <span class="timer-label" data-i18n="timerDays">Дни</span>
+            </div>
+            <span class="timer-separator">:</span>
+            <div class="timer-block">
+              <span class="timer-value" id="timer-hours">00</span>
+              <span class="timer-label" data-i18n="timerHours">Часы</span>
+            </div>
+            <span class="timer-separator">:</span>
+            <div class="timer-block">
+              <span class="timer-value" id="timer-minutes">00</span>
+              <span class="timer-label" data-i18n="timerMinutes">Минуты</span>
+            </div>
+            <span class="timer-separator">:</span>
+            <div class="timer-block">
+              <span class="timer-value" id="timer-seconds">00</span>
+              <span class="timer-label" data-i18n="timerSeconds">Секунды</span>
+            </div>
+          </div>
+          <div class="club30-video">
+            <video src="dancing cat.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
+          </div>
+        </div>
+      </section>
+
+      <div class="finale__controls storybook-controls">
+        <button class="quiet-button" id="replayVideo" type="button" data-replay-video>
+          <span aria-hidden="true">↻</span>
+          <span data-i18n="replay">Посмотреть вступление ещё раз</span>
+        </button>
+        <button class="quiet-button" id="returnToStart" type="button">
+          <span aria-hidden="true">↑</span>
+          <span data-i18n="return">Вернуться к конверту</span>
+        </button>
+      </div>
+
+      <footer class="storybook-footer">
+        <p data-i18n="footer">Сделано с теплом для Елены · 28.07.2026</p>
+      </footer>
+    </section>
+  </main>
+
+  <div class="fight-overlay" id="fightOverlay" role="dialog" aria-modal="true" aria-label="Aurora Showdown fighting game" hidden>
+    <header class="fight-topbar">
+      <span class="fight-topbar__title" data-fight-copy="topTitle">Aurora Showdown · White Sea</span>
+      <div class="fight-topbar__actions">
+        <button type="button" data-fight-mute data-fight-aria="mute" aria-label="Mute sound">♫</button>
+        <button type="button" data-fight-close data-fight-aria="close" aria-label="Close game">×</button>
+      </div>
+    </header>
+
+    <div class="fight-stage">
+      <div id="fight-game-canvas" aria-label="Playable Elena versus Yanina birthday sparring game"></div>
+
+      <div class="fight-loading" id="fightLoading" data-fight-copy="loading">Preparing the arena</div>
+
+      <div class="fight-controls" aria-label="Touch controls">
+        <div class="fight-dpad" aria-label="Movement controls">
+          <button class="fight-control fight-control--up" type="button" data-control="up" aria-label="Jump">↑</button>
+          <button class="fight-control fight-control--left" type="button" data-control="left" aria-label="Move left">←</button>
+          <button class="fight-control fight-control--right" type="button" data-control="right" aria-label="Move right">→</button>
+          <button class="fight-control fight-control--down" type="button" data-control="down" aria-label="Crouch">↓</button>
+        </div>
+        <div class="fight-actions" aria-label="Attack controls">
+          <button class="fight-control fight-control--punch" type="button" data-control="punch" aria-label="Punch">✦</button>
+          <button class="fight-control fight-control--kick" type="button" data-control="kick" aria-label="Kick">◆</button>
+          <button class="fight-control fight-control--block" type="button" data-control="block" aria-label="Block">▣</button>
+          <button class="fight-control fight-control--special" type="button" data-control="special" aria-label="Aurora special move"><span data-fight-copy="special">Aurora</span></button>
+        </div>
+      </div>
+
+      <div class="fight-rotate" aria-live="polite">
+        <div>
+          <div class="fight-rotate__phone" aria-hidden="true"></div>
+          <strong data-fight-copy="rotateTitle">Turn your phone sideways</strong>
+          <p data-fight-copy="rotateText">The White Sea arena needs a little more horizon. The fight will continue automatically in landscape.</p>
+        </div>
+      </div>
+
+      <div class="fight-result" id="fightResult" hidden>
+        <div class="fight-result__card">
+          <span class="fight-result__eyebrow" data-fight-copy="resultEyebrow">Birthday sparring complete</span>
+          <h3 id="fightResultTitle">Elena shines!</h3>
+          <p id="fightResultText">You outread Yanina and lit the White Sea with a perfect birthday finish.</p>
+          <div class="fight-result__actions">
+            <button type="button" data-fight-replay data-fight-copy="replay">Fight again</button>
+            <button type="button" data-fight-result-close data-fight-copy="return">Back to the story</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reader-dialog" id="storybookReader" role="dialog" aria-modal="true" aria-labelledby="readerDialogTitle" hidden>
+    <button class="reader-dialog__backdrop" type="button" data-reader-close tabindex="-1" data-i18n-aria="readerCloseAria"></button>
+    <div class="reader-dialog__panel" role="document">
+      <header class="reader-dialog__header">
+        <div>
+          <p data-i18n="readerEyebrow">Книжная полка Янины и Елены</p>
+          <h2 id="readerDialogTitle"><span id="readerBookNumber">01</span><i aria-hidden="true">·</i><span id="readerBookTitle">Книга первая</span></h2>
+        </div>
+        <button class="reader-dialog__close" id="readerClose" type="button" data-reader-close data-i18n-aria="readerCloseAria"><span aria-hidden="true">×</span></button>
+      </header>
+
+      <div class="reader-dialog__viewport">
+        <iframe id="readerFrame" title="Встроенная программа чтения PDF" data-i18n-title="readerFrameTitle"></iframe>
+        <div class="reader-dialog__loading" id="readerLoading" aria-live="polite"><span aria-hidden="true">✦</span><p data-i18n="readerLoading">Открываем книгу…</p></div>
+      </div>
+
+      <footer class="reader-dialog__footer">
+        <p data-i18n="readerFallback">Если встроенная книга не отображается, открой её в новой вкладке.</p>
+        <div>
+          <a id="readerOpenTab" href="#" target="_blank" rel="noopener"><span data-i18n="readerOpenTab">Открыть отдельно</span><span aria-hidden="true">↗</span></a>
+          <a id="readerDownload" href="#" download><span data-i18n="storybookDownload">Скачать</span><span aria-hidden="true">↓</span></a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript-message">Для этого письма нужен JavaScript. Пожалуйста, включи его и открой страницу снова.</div>
+  </noscript>
+</body>
+</html>
