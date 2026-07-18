@@ -7,7 +7,11 @@
   <meta name="description" content="Особенное письмо для Елены в день её рождения.">
   <title>Елене — 29</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game/fight-game.css">
   <script src="script.js" defer></script>
+  <script src="game/vendor/phaser.min.js" defer></script>
+  <script src="game/fighter-assets.js?v=3" defer></script>
+  <script src="game/fight-game.js?v=3" defer></script>
 </head>
 <body class="is-gated">
   <div class="ambient-grain" aria-hidden="true"></div>
@@ -51,7 +55,7 @@
     <div class="video-overlay__aurora" aria-hidden="true"></div>
     <h2 class="sr-only" id="videoTitle" data-i18n="videoTitle">Маленькое вступление</h2>
     <div class="video-frame">
-      <video id="introVideo" playsinline preload="metadata" src="Video.mp4"></video>
+      <video id="introVideo" playsinline preload="metadata" src="videointro.mp4"></video>
       <div class="video-frame__shine" aria-hidden="true"></div>
       <p class="video-error" id="videoError" data-i18n="videoError" hidden>Видео не запустилось, но письмо всё равно ждёт тебя.</p>
     </div>
@@ -92,7 +96,7 @@
 
       <figure class="hero__portrait reveal" data-reveal>
         <div class="hero__photo-mat">
-          <img src="Hero Section.png" alt="Елена задувает свечи 29 на праздничном торте" data-i18n-alt="heroAlt" fetchpriority="high">
+          <img src="Hero Section.webp" alt="Елена задувает свечи 29 на праздничном торте" data-i18n-alt="heroAlt" fetchpriority="high">
           <figcaption>
             <span data-i18n="portraitCaption">Сияние найдено. Источник — Елена.</span>
             <span aria-hidden="true">№ 29</span>
@@ -266,6 +270,28 @@
 
       <div class="paw-trail" id="pawTrail" aria-hidden="true"></div>
 
+      <section class="fight-section reveal" id="birthdayFight" data-reveal aria-labelledby="fightSectionTitle">
+        <header class="fight-section__header">
+          <div>
+            <p class="section-kicker" data-fight-copy="kicker">A secret birthday bonus round</p>
+            <h2 id="fightSectionTitle" data-fight-copy="title">Aurora Showdown</h2>
+          </div>
+          <p class="fight-section__intro" data-fight-copy="intro">Guide Elena through a playful best-of-three sparring match against Yanina. Read the distance, block at the right moment, and charge the Aurora move before the 29-second bell.</p>
+        </header>
+
+        <div class="fight-preview">
+          <span class="fight-preview__badge" data-fight-copy="badge">Mobile birthday fighter</span>
+          <div class="fight-preview__content">
+            <div class="fight-preview__copy">
+              <strong data-fight-copy="previewTitle">Elena vs. Yanina</strong>
+              <span data-fight-copy="previewMeta">Best of three · 29-second rounds · adaptive opponent</span>
+            </div>
+            <button class="fight-start" type="button" data-fight-start data-fight-copy="start">Start fight</button>
+          </div>
+        </div>
+        <p class="fight-mobile-note" data-fight-copy="rotateNote">The fight opens in landscape mode</p>
+      </section>
+
       <section class="club30-section reveal" data-reveal id="club30">
         <div class="club30-header">
           <p class="section-kicker section-kicker--green" data-i18n="club30Kicker">Увидимся в следующем году</p>
@@ -315,6 +341,57 @@
       </footer>
     </section>
   </main>
+
+  <div class="fight-overlay" id="fightOverlay" role="dialog" aria-modal="true" aria-label="Aurora Showdown fighting game" hidden>
+    <header class="fight-topbar">
+      <span class="fight-topbar__title" data-fight-copy="topTitle">Aurora Showdown · White Sea</span>
+      <div class="fight-topbar__actions">
+        <button type="button" data-fight-mute data-fight-aria="mute" aria-label="Mute sound">♫</button>
+        <button type="button" data-fight-close data-fight-aria="close" aria-label="Close game">×</button>
+      </div>
+    </header>
+
+    <div class="fight-stage">
+      <div id="fight-game-canvas" aria-label="Playable Elena versus Yanina birthday sparring game"></div>
+
+      <div class="fight-loading" id="fightLoading" data-fight-copy="loading">Preparing the arena</div>
+
+      <div class="fight-controls" aria-label="Touch controls">
+        <div class="fight-dpad" aria-label="Movement controls">
+          <button class="fight-control fight-control--up" type="button" data-control="up" aria-label="Jump">↑</button>
+          <button class="fight-control fight-control--left" type="button" data-control="left" aria-label="Move left">←</button>
+          <button class="fight-control fight-control--right" type="button" data-control="right" aria-label="Move right">→</button>
+          <button class="fight-control fight-control--down" type="button" data-control="down" aria-label="Crouch">↓</button>
+        </div>
+        <div class="fight-actions" aria-label="Attack controls">
+          <button class="fight-control fight-control--punch" type="button" data-control="punch" aria-label="Punch">✦</button>
+          <button class="fight-control fight-control--kick" type="button" data-control="kick" aria-label="Kick">◆</button>
+          <button class="fight-control fight-control--block" type="button" data-control="block" aria-label="Block">▣</button>
+          <button class="fight-control fight-control--special" type="button" data-control="special" aria-label="Aurora special move"><span data-fight-copy="special">Aurora</span></button>
+        </div>
+      </div>
+
+      <div class="fight-rotate" aria-live="polite">
+        <div>
+          <div class="fight-rotate__phone" aria-hidden="true"></div>
+          <strong data-fight-copy="rotateTitle">Turn your phone sideways</strong>
+          <p data-fight-copy="rotateText">The White Sea arena needs a little more horizon. The fight will continue automatically in landscape.</p>
+        </div>
+      </div>
+
+      <div class="fight-result" id="fightResult" hidden>
+        <div class="fight-result__card">
+          <span class="fight-result__eyebrow" data-fight-copy="resultEyebrow">Birthday sparring complete</span>
+          <h3 id="fightResultTitle">Elena shines!</h3>
+          <p id="fightResultText">You outread Yanina and lit the White Sea with a perfect birthday finish.</p>
+          <div class="fight-result__actions">
+            <button type="button" data-fight-replay data-fight-copy="replay">Fight again</button>
+            <button type="button" data-fight-result-close data-fight-copy="return">Back to the story</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="reader-dialog" id="storybookReader" role="dialog" aria-modal="true" aria-labelledby="readerDialogTitle" hidden>
     <button class="reader-dialog__backdrop" type="button" data-reader-close tabindex="-1" data-i18n-aria="readerCloseAria"></button>

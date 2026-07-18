@@ -1,0 +1,557 @@
+/* Aurora Showdown — mobile-first birthday fighter */
+.fight-section {
+  position: relative;
+  margin: clamp(5rem, 10vw, 9rem) auto;
+  width: min(1180px, calc(100% - 2rem));
+  color: #f7f1df;
+}
+
+.fight-section::before {
+  content: "";
+  position: absolute;
+  inset: -4rem -5vw;
+  z-index: -1;
+  border-radius: 3rem;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(84, 233, 187, 0.16), transparent 34%),
+    radial-gradient(circle at 88% 4%, rgba(130, 112, 255, 0.18), transparent 31%),
+    linear-gradient(145deg, #071a28, #102f38 55%, #071721);
+  box-shadow: 0 2rem 6rem rgba(4, 17, 24, 0.35);
+}
+
+.fight-section__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.72fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.fight-section__header h2 {
+  max-width: 14ch;
+  margin: 0.45rem 0 0;
+  color: #fff9ea;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+}
+
+.fight-section__intro {
+  margin: 0;
+  color: rgba(241, 249, 244, 0.78);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.7;
+}
+
+.fight-preview {
+  position: relative;
+  min-height: min(62vw, 690px);
+  overflow: hidden;
+  border: 1px solid rgba(218, 188, 111, 0.42);
+  border-radius: clamp(1.2rem, 3vw, 2rem);
+  background-image:
+    linear-gradient(180deg, transparent 45%, rgba(3, 12, 20, 0.12) 60%, rgba(3, 12, 20, 0.88)),
+    url("../assets/game/ui/fight-preview.webp");
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.34);
+  isolation: isolate;
+}
+
+.fight-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, rgba(49, 230, 174, 0.08), transparent 42%, rgba(153, 117, 255, 0.1));
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.fight-preview__badge {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 2rem);
+  left: clamp(1rem, 2.5vw, 2rem);
+  display: inline-flex;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 241, 190, 0.36);
+  border-radius: 999px;
+  background: rgba(2, 15, 25, 0.64);
+  box-shadow: inset 0 0 1.8rem rgba(69, 231, 184, 0.08);
+  color: #fff5cf;
+  font-size: 0.73rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+}
+
+.fight-preview__badge::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #6cf2c1;
+  box-shadow: 0 0 1rem #6cf2c1;
+}
+
+.fight-preview__content {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2.5rem);
+  bottom: clamp(1rem, 3vw, 2.5rem);
+  left: clamp(1rem, 3vw, 2.5rem);
+  display: flex;
+  gap: 1.25rem;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.fight-preview__copy {
+  max-width: 38rem;
+  text-shadow: 0 2px 18px #020b10;
+}
+
+.fight-preview__copy strong {
+  display: block;
+  color: #fff7dc;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 3.5vw, 3.1rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.fight-preview__copy span {
+  display: block;
+  margin-top: 0.55rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+}
+
+.fight-start {
+  flex: 0 0 auto;
+  min-width: clamp(11rem, 22vw, 15rem);
+  min-height: 4.2rem;
+  padding: 1rem 1.6rem;
+  border: 1px solid rgba(255, 244, 194, 0.72);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f8eab8, #cda75a);
+  box-shadow: 0 0.9rem 2.4rem rgba(0, 0, 0, 0.28), 0 0 2.2rem rgba(95, 240, 191, 0.2);
+  color: #12342e;
+  cursor: pointer;
+  font: 700 0.84rem/1 system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.fight-start:hover,
+.fight-start:focus-visible {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.34), 0 0 3rem rgba(95, 240, 191, 0.35);
+}
+
+.fight-start:focus-visible,
+.fight-topbar button:focus-visible,
+.fight-control:focus-visible,
+.fight-result button:focus-visible {
+  outline: 3px solid #82ffd2;
+  outline-offset: 4px;
+}
+
+.fight-mobile-note {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 0;
+  color: rgba(239, 249, 243, 0.67);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fight-mobile-note::before {
+  content: "↻";
+  color: #7ef2c5;
+  font-size: 1.1rem;
+}
+
+body.fight-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.fight-overlay[hidden] {
+  display: none;
+}
+
+.fight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #020810;
+  color: #fff;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fight-topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  min-height: 3.2rem;
+  padding: max(0.45rem, env(safe-area-inset-top)) max(0.7rem, env(safe-area-inset-right)) 0.45rem max(0.7rem, env(safe-area-inset-left));
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(3, 12, 20, 0.92);
+}
+
+.fight-topbar__title {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  color: #fff1bf;
+  font: 700 clamp(0.68rem, 1.7vw, 0.83rem)/1 system-ui, sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.fight-topbar__title::before {
+  content: "";
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: #73f1bf;
+  box-shadow: 0 0 1rem #73f1bf;
+}
+
+.fight-topbar__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fight-topbar button {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.fight-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #03101a;
+}
+
+#fight-game-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#fight-game-canvas canvas {
+  display: block;
+}
+
+.fight-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+}
+
+.fight-dpad,
+.fight-actions {
+  position: absolute;
+  bottom: max(0.8rem, env(safe-area-inset-bottom));
+  pointer-events: auto;
+}
+
+.fight-dpad {
+  left: max(1rem, env(safe-area-inset-left));
+  width: clamp(8.7rem, 23vw, 12rem);
+  aspect-ratio: 1;
+}
+
+.fight-actions {
+  right: max(1rem, env(safe-area-inset-right));
+  width: clamp(11rem, 27vw, 15rem);
+  aspect-ratio: 1.25;
+}
+
+.fight-control {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(235, 255, 250, 0.32);
+  border-radius: 50%;
+  background: rgba(4, 22, 31, 0.56);
+  box-shadow: inset 0 0 1.4rem rgba(100, 236, 194, 0.08), 0 0.4rem 1rem rgba(0, 0, 0, 0.22);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font: 700 clamp(0.9rem, 2.3vw, 1.25rem)/1 system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(7px);
+}
+
+.fight-control.is-pressed {
+  transform: scale(0.92);
+  border-color: rgba(126, 255, 210, 0.9);
+  background: rgba(55, 184, 145, 0.52);
+  box-shadow: inset 0 0 1.5rem rgba(170, 255, 229, 0.24), 0 0 1.2rem rgba(82, 237, 188, 0.3);
+}
+
+.fight-dpad .fight-control {
+  width: 34%;
+  height: 34%;
+}
+
+.fight-control--up { top: 0; left: 33%; }
+.fight-control--left { top: 33%; left: 0; }
+.fight-control--right { top: 33%; right: 0; }
+.fight-control--down { bottom: 0; left: 33%; }
+
+.fight-actions .fight-control {
+  width: 35%;
+  aspect-ratio: 1;
+}
+
+.fight-control--punch { top: 0; right: 3%; }
+.fight-control--kick { top: 30%; left: 0; }
+.fight-control--block { bottom: 0; left: 32%; }
+.fight-control--special {
+  right: 0;
+  bottom: 1%;
+  border-color: rgba(230, 209, 255, 0.72);
+  background: radial-gradient(circle at 40% 35%, rgba(124, 255, 217, 0.78), rgba(78, 91, 213, 0.76) 52%, rgba(34, 12, 68, 0.78));
+  box-shadow: inset 0 0 1.7rem rgba(255, 255, 255, 0.18), 0 0 1.5rem rgba(115, 107, 255, 0.48);
+  color: #fff;
+  font-size: clamp(0.58rem, 1.5vw, 0.78rem);
+  letter-spacing: 0.05em;
+}
+
+.fight-control--special:not(.is-ready) {
+  opacity: 0.42;
+  filter: grayscale(0.5);
+}
+
+.fight-rotate {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  padding: 2rem;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(73, 231, 180, 0.18), transparent 36%),
+    #04131d;
+  text-align: center;
+}
+
+.fight-rotate__phone {
+  position: relative;
+  width: 4.5rem;
+  height: 7.5rem;
+  margin: 0 auto 1.8rem;
+  border: 0.28rem solid #f6e9bc;
+  border-radius: 0.8rem;
+  animation: fight-phone-rotate 2.4s ease-in-out infinite;
+}
+
+.fight-rotate__phone::after {
+  content: "";
+  position: absolute;
+  bottom: 0.35rem;
+  left: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #f6e9bc;
+}
+
+.fight-rotate strong {
+  display: block;
+  color: #fff5cf;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 7vw, 2.8rem);
+  font-weight: 400;
+}
+
+.fight-rotate p {
+  max-width: 28rem;
+  margin: 0.8rem auto 0;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.6;
+}
+
+.fight-result[hidden] {
+  display: none;
+}
+
+.fight-result {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  padding: 2rem;
+  place-items: center;
+  background: rgba(2, 9, 15, 0.76);
+  backdrop-filter: blur(9px);
+}
+
+.fight-result__card {
+  width: min(29rem, 92vw);
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border: 1px solid rgba(244, 221, 150, 0.44);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(101, 239, 194, 0.15), transparent 42%),
+    linear-gradient(150deg, rgba(13, 40, 48, 0.98), rgba(5, 18, 29, 0.98));
+  box-shadow: 0 2rem 7rem rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.fight-result__eyebrow {
+  color: #7af1c2;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.fight-result h3 {
+  margin: 0.55rem 0 0.7rem;
+  color: #fff4cd;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 7vw, 3.7rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.fight-result p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.55;
+}
+
+.fight-result__actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.fight-result button {
+  min-height: 3rem;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.fight-result button:first-child {
+  border-color: #ead18b;
+  background: linear-gradient(135deg, #f7e9b8, #cba45b);
+  color: #12342e;
+}
+
+.fight-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: grid;
+  place-items: center;
+  background: #04131d;
+  color: #fff2c1;
+  font: 700 0.78rem/1 system-ui, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.fight-loading[hidden] { display: none; }
+
+.fight-loading::before {
+  content: "";
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  border: 2px solid rgba(114, 242, 193, 0.16);
+  border-top-color: #72f2c1;
+  border-radius: 50%;
+  animation: fight-spin 1.2s linear infinite;
+}
+
+@keyframes fight-spin { to { transform: rotate(360deg); } }
+
+@keyframes fight-phone-rotate {
+  0%, 22% { transform: rotate(0deg); }
+  48%, 72% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  .fight-overlay:not([hidden]) .fight-rotate { display: grid; }
+}
+
+@media (max-width: 720px) {
+  .fight-section__header {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .fight-preview {
+    min-height: 72vw;
+    background-position: center;
+  }
+
+  .fight-preview__content {
+    display: grid;
+  }
+
+  .fight-preview__copy span { display: none; }
+
+  .fight-start {
+    width: 100%;
+    min-height: 3.7rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  .fight-topbar { min-height: 2.5rem; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .fight-topbar button { width: 2rem; height: 2rem; }
+  .fight-dpad, .fight-actions { bottom: max(0.35rem, env(safe-area-inset-bottom)); }
+  .fight-dpad { width: min(23vw, 8.6rem); }
+  .fight-actions { width: min(28vw, 11rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fight-start,
+  .fight-control,
+  .fight-rotate__phone,
+  .fight-loading::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
