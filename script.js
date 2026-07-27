@@ -21,8 +21,11 @@
       heroKicker: "Письмо с края Белого моря",
       heroTitle: "Елена, с днём рождения.",
       heroDedication: "Для самой красивой женщины из тех, кого мне посчастливилось знать.",
-      july: "июля",
       heroAlt: "Елена задувает свечи 29 на праздничном торте",
+      heroAlt2: "Елена задувает свечи 29 — кадр 2",
+      heroAlt3: "Елена задувает свечи 29 — кадр 3",
+      heroAlt4: "Елена задувает свечи 29 — кадр 4",
+      burstSlideshowAria: "Серия снимков Елены в день рождения",
       portraitCaption: "Сияние найдено. Источник — Елена.",
       scroll: "Читать письмо",
       scrollAria: "Перейти к письму",
@@ -110,6 +113,10 @@
       heroDedication: "For the most beautiful woman I have ever been lucky enough to know.",
       july: "July",
       heroAlt: "Elena blowing out number 29 candles on her birthday cake",
+      heroAlt2: "Elena blowing out candles 29 — shot 2",
+      heroAlt3: "Elena blowing out candles 29 — shot 3",
+      heroAlt4: "Elena blowing out candles 29 — shot 4",
+      burstSlideshowAria: "Burst photo sequence of Elena",
       portraitCaption: "Glow located. Source: Elena.",
       scroll: "Read the letter",
       scrollAria: "Go to the letter",
@@ -684,12 +691,133 @@
     window.setTimeout(() => finalMessage.focus({ preventScroll: true }), reduceMotion.matches ? 20 : 600);
   });
 
+  function initHeroBurstSlideshow() {
+    const container = document.getElementById("heroBurstSlideshow");
+    if (!container) return;
+
+    const images = container.querySelectorAll(".hero__burst-img");
+    const shutter = document.getElementById("burstShutter");
+    const counter = document.getElementById("burstCounter");
+    const dot = container.querySelector(".hero__burst-dot");
+    const photoMat = container.closest(".hero__photo-mat");
+
+    if (!images || images.length === 0) return;
+
+    const angles = [1.4, -0.6, 2.1, -1.2];
+    let currentIndex = 0;
+    let timer = null;
+    let isPaused = false;
+    const intervalTime = 1200;
+
+    function goToFrame(index, flash = true) {
+      if (index === currentIndex && images[index].classList.contains("is-active")) return;
+
+      images.forEach((img, i) => {
+        if (i === index) {
+          img.classList.add("is-active");
+        } else {
+          img.classList.remove("is-active");
+        }
+      });
+
+      currentIndex = index;
+
+      if (counter) {
+        counter.textContent = `${isPaused ? "PAUSED" : "BURST"} ${currentIndex + 1}/${images.length}`;
+      }
+
+      if (photoMat && angles[currentIndex % angles.length] !== undefined) {
+        photoMat.style.setProperty("--photo-rot", `${angles[currentIndex % angles.length]}deg`);
+      }
+
+      if (flash && shutter && !reduceMotion.matches) {
+        shutter.classList.add("is-flashing");
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            shutter.classList.remove("is-flashing");
+          }, 60);
+        });
+      }
+    }
+
+    function nextFrame() {
+      const next = (currentIndex + 1) % images.length;
+      goToFrame(next, true);
+    }
+
+    function startSlideshow() {
+      if (timer || isPaused) return;
+      timer = window.setInterval(nextFrame, intervalTime);
+    }
+
+    function stopSlideshow() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      if (dot) {
+        dot.classList.toggle("is-paused", isPaused);
+      }
+      if (counter) {
+        counter.textContent = `${isPaused ? "PAUSED" : "BURST"} ${currentIndex + 1}/${images.length}`;
+      }
+      if (isPaused) {
+        stopSlideshow();
+      } else {
+        nextFrame();
+        startSlideshow();
+      }
+    }
+
+    container.addEventListener("click", () => {
+      togglePause();
+    });
+
+    container.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        togglePause();
+      }
+    });
+
+    if (typeof IntersectionObserver !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              startSlideshow();
+            } else {
+              stopSlideshow();
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      observer.observe(container);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopSlideshow();
+      } else if (!isPaused) {
+        startSlideshow();
+      }
+    });
+
+    startSlideshow();
+  }
+
   returnButton.addEventListener("click", resetExperience);
 
   createWishLights();
   createPawTrail();
   setupRevealObservers();
   setupPointerLight();
+  initHeroBurstSlideshow();
   applyLanguage(currentLanguage);
 
   // Countdown Timer Logic

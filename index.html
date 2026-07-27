@@ -103,7 +103,17 @@
 
       <figure class="hero__portrait reveal" data-reveal>
         <div class="hero__photo-mat">
-          <img src="Hero Section.webp" alt="Елена задувает свечи 29 на праздничном торте" data-i18n-alt="heroAlt" fetchpriority="high">
+          <div class="hero__burst-slideshow" id="heroBurstSlideshow" role="region" aria-label="Серия снимков Елены" data-i18n-aria="burstSlideshowAria" tabindex="0" title="Нажми, чтобы переключить кадр">
+            <div class="hero__burst-shutter" id="burstShutter" aria-hidden="true"></div>
+            <img class="hero__burst-img is-active" src="Hero Section.webp" alt="Елена задувает свечи 29 на праздничном торте" data-i18n-alt="heroAlt" fetchpriority="high">
+            <img class="hero__burst-img" src="Hero Section 02.webp" alt="Елена задувает свечи 29 — кадр 2" data-i18n-alt="heroAlt2" loading="eager">
+            <img class="hero__burst-img" src="Hero Section 03.webp" alt="Елена задувает свечи 29 — кадр 3" data-i18n-alt="heroAlt3" loading="eager">
+            <img class="hero__burst-img" src="Hero Section 04.webp" alt="Елена задувает свечи 29 — кадр 4" data-i18n-alt="heroAlt4" loading="eager">
+            <div class="hero__burst-badge" aria-hidden="true">
+              <span class="hero__burst-dot"></span>
+              <span class="hero__burst-counter" id="burstCounter">BURST 1/4</span>
+            </div>
+          </div>
           <figcaption>
             <span data-i18n="portraitCaption">Сияние найдено. Источник — Елена.</span>
             <span aria-hidden="true">№ 29</span>
